@@ -1,0 +1,102 @@
+//Configurar Boton de Inicio de Chat FBM
+curl -X POST -H "Content-Type: application/json" -d '{
+  "get_started": {
+    "payload": "postback_welcome"
+  }
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
+
+//Configurar descripción al inicio del chat
+curl -X POST -H "Content-Type: application/json" -d '{
+  "greeting": [
+    {
+      "locale": "default",
+      "text": "Hola {{user_first_name}}, Soy Sofia tu asistente virtual Adminfo."
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
+
+
+//Configurar menu Persistente
+curl -X POST -H "Content-Type: application/json" -d '{
+  "persistent_menu": [
+    {
+      "locale": "default",
+      "composer_input_disabled": false,
+      "call_to_actions": [
+        {
+          "title": "Para Ayudarte",
+          "type": "nested",
+          "call_to_actions": [
+            {
+              "title": "Estado de Cuenta",
+              "type": "postback",
+              "payload": "Consultar el estado de cuenta"
+            },
+            {
+              "title": "Mis Obligaciones",
+              "type": "postback",
+              "payload": "consultaObligacion"
+            },
+            {
+              "title": "Nueva Fecha de Pago",
+              "type": "postback",
+              "payload": "Convenir una fecha nueva de pago"
+            },
+            {
+              "title": "Datos Personales",
+              "type": "postback",
+              "payload": "Actualizar mis datos"
+            }
+          ]
+        },
+        {
+          "title": "Políticas",
+          "type": "nested",
+          "call_to_actions": [
+            {
+              "type": "web_url",
+              "title": "Privacidad",
+              "url": "https://www.solati.com.co/",
+              "webview_height_ratio": "compact"
+            },
+            {
+              "type": "web_url",
+              "title": "Condiciones Servicio",
+              "url": "https://www.solati.com.co/",
+              "webview_height_ratio": "compact"
+            }
+          ]
+        },
+        {
+          "type": "web_url",
+          "title": "Pagina Web",
+          "url": "https://www.solati.com.co/",
+          "webview_height_ratio": "full"
+        }
+      ]
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
+
+
+//Borrar menu persistente
+curl -X DELETE -H "Content-Type: application/json" -d '{
+  "fields": [
+    "persistent_menu"
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
+
+//senderActions
+"mark_seen:" //Marca el último mensaje como leído.
+"typing_on:" //Activa los indicadores de escritura.
+"typing_off:" //Desactiva los indicadores de escritura.
+
+//Opciones de tamaño de vista web
+"webview_height_ratio": "compact" //2/4
+
+"webview_height_ratio": "tall" //3/4
+
+"webview_height_ratio": "full" //4/4
+
+"top_element_style": "compact",// Muestra elementos de manera compacta
+"top_element_style": "large",// Destaca el Primer elemento
