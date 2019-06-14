@@ -24,9 +24,11 @@ app.get('/webhook', function (req, response) {
 })
 //Recibe mediante post del api de FB el json
 app.post('/webhook/', function (req, response) {
-    const data = req.body.originalDetectIntentRequest.payload.data;
-    console.log(JSON.stringify(data));
-    handleEvent(data.sender.id, data);
+    console.log(" entrada -->",JSON.stringify(req.body, undefined, 3))
+    
+    //const data = req.body.originalDetectIntentRequest.payload.data;
+    //console.log(JSON.stringify(data));
+    //handleEvent(data.sender.id, data);
     response.sendStatus(200);
 })
 

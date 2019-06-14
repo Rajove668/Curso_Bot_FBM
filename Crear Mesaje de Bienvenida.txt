@@ -38,6 +38,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
               "payload": "consultaObligacion"
             },
             {
+              "title": "Pagar Obligaciones",
+              "type": "postback",
+              "payload": "Pagar mis obligaciones"
+            },
+            {
               "title": "Nueva Fecha de Pago",
               "type": "postback",
               "payload": "Convenir una fecha nueva de pago"
